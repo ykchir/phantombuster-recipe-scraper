@@ -1,0 +1,24 @@
+{
+  "name": "phantombuster-recipe-scraper",
+  "version": "1.0.0",
+  "description": "Create a Phantom",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "phantombuster": "^0.0.1",
+    "puppeteer": "^23.11.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.2",
+    "@types/puppeteer": "^7.0.4",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.2"
+  }
+}
