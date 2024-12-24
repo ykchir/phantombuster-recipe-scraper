@@ -34,7 +34,7 @@ describe('PuppeteerRecipeRepository', () => {
     expect(recipes[0]).toHaveProperty('rating');
     expect(recipes[0]).toHaveProperty('reviews');
     expect(recipes[0]).toHaveProperty('url');
-  });
+  }, 30000);
 
   it('should handle scraping multiple pages', async () => {
     const repository = new PuppeteerRecipeRepository();
@@ -42,5 +42,5 @@ describe('PuppeteerRecipeRepository', () => {
 
     expect(recipes.length).toBeGreaterThan(0);
     expect(recipes[0]).toHaveProperty('name');
-  });
+  }, 30000);
 });

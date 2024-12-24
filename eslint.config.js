@@ -13,6 +13,10 @@ export default [
     files: ['**/*.ts'],
     languageOptions: {
       parser: tsParser,
+      globals: {
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+      },
       parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
@@ -65,7 +69,10 @@ export default [
     },
     languageOptions: {
       globals: {
-        ...jestPlugin.environments.globals.globals, // Ajoute les globales Jest
+        ...jestPlugin.environments.globals.globals,
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
       },
     },
     rules: {

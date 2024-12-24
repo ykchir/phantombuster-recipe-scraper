@@ -12,6 +12,8 @@
     "strictPropertyInitialization": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
+    "lib": ["es6", "dom"],
+    "types": ["node", "jest"],
     "typeRoots": ["./src/types", "./node_modules/@types"]
   },
   "include": ["src/**/*", "__mocks__/**/*", "tests/**/*"],
