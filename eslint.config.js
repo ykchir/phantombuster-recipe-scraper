@@ -41,6 +41,22 @@ export default [
     },
   },
 
+  // Mocks configuration
+  {
+    files: ['__mocks__/**/*.ts'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module',
+        project: './tsconfig.json',
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'no', // todo: remove this rule
+    },
+  },
+
   // Jest configuration
   {
     files: ['**/*.test.ts'],
