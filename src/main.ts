@@ -1,19 +1,21 @@
 import Buster from 'phantombuster';
 import { RecipeController } from './interface/RecipeController';
+import { ArgumentSchema, Arguments } from './shared/Validation';
 import { Logger } from './shared/Logger';
 
 (async () => {
   const buster = new Buster();
 
-  // const args = buster.argument as { query?: string; pages?: number };
-  const args = { query: 'chicken', pages: 1 };
-  const query = args.query || 'chicken';
-  const pages = args.pages || 1;
-
-  const controller = new RecipeController();
+  const argsRaw = buster.argument as Record<string, unknown>;
+  const args = ArgumentSchema.parse(argsRaw) as Arguments;
 
   try {
+    const query = args.query;
+    const pages = args.pages;
+
+    const controller = new RecipeController();
     const results = await controller.handleSearch(query, pages);
+
     await buster.setResultObject(results);
   } catch (error: unknown) {
     if (error instanceof Error) {

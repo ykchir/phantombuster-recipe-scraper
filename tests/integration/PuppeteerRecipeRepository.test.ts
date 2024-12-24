@@ -13,13 +13,26 @@ afterAll(async () => {
   }
 });
 
-test('PuppeteerRecipeRepository should return recipes from Allrecipes', async () => {
-  const repository = new PuppeteerRecipeRepository();
-  const recipes = await repository.searchRecipes('chicken', 1);
+describe('PuppeteerRecipeRepository', () => {
+  it('PuppeteerRecipeRepository should return recipes from Allrecipes', async () => {
+    const repository = new PuppeteerRecipeRepository();
+    const recipes = await repository.searchRecipes('chicken', 1);
 
-  expect(recipes.length).toBeGreaterThan(0);
-  expect(recipes[0]).toHaveProperty('name');
-  expect(recipes[0]).toHaveProperty('rating');
-  expect(recipes[0]).toHaveProperty('reviews');
-  expect(recipes[0]).toHaveProperty('url');
+    expect(recipes.length).toBeGreaterThan(0);
+    expect(recipes[0]).toHaveProperty('name');
+    expect(recipes[0]).toHaveProperty('rating');
+    expect(recipes[0]).toHaveProperty('reviews');
+    expect(recipes[0]).toHaveProperty('url');
+  });
+
+  it('should scrape multiple pages of recipes', async () => {
+    const repository = new PuppeteerRecipeRepository();
+    const recipes = await repository.searchRecipes('chicken', 2);
+
+    expect(recipes.length).toBeGreaterThan(0);
+    expect(recipes[0]).toHaveProperty('name');
+    expect(recipes[0]).toHaveProperty('rating');
+    expect(recipes[0]).toHaveProperty('reviews');
+    expect(recipes[0]).toHaveProperty('url');
+  });
 });
