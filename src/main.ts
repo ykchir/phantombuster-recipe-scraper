@@ -13,6 +13,8 @@ import { Logger } from './shared/Logger';
     const query = args.query;
     const pages = args.pages;
 
+    Logger.info(`Agent ID: ${buster.agentId}`);
+
     const controller = new RecipeController();
     const results = await controller.handleSearch(query, pages);
 

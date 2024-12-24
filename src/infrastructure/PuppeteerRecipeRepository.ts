@@ -1,4 +1,5 @@
 import puppeteer, { Page } from 'puppeteer';
+import { performance } from 'perf_hooks';
 import { Recipe } from '../domain/Recipe';
 import { RecipeRepository } from '../domain/RecipeRepository';
 import { solveCaptcha } from '../shared/CaptchaSolver';
@@ -7,13 +8,24 @@ import { delay } from '../shared/Utils';
 
 export class PuppeteerRecipeRepository implements RecipeRepository {
   async searchRecipes(query: string, pages: number): Promise<Recipe[]> {
+    const startTime = performance.now();
     const browser = await puppeteer.launch({ headless: 'new' });
     const recipes: Recipe[] = [];
     try {
       for (let i = 0; i < pages; i++) {
         const page = await browser.newPage();
         const pageRecipes = await this.scrapePage(page, query, i);
+
+        const endTime = performance.now();
+        const memoryUsage = process.memoryUsage();
+
+        Logger.info(`Execution Time: ${(endTime - startTime).toFixed(2)} ms`);
+        Logger.info(
+          `Memory Usage: RSS ${(memoryUsage.rss / 1024 / 1024).toFixed(2)} MB`,
+        );
+
         recipes.push(...pageRecipes);
+
         await page.close();
         await delay(1000 + Math.random() * 2000);
       }
@@ -23,18 +35,23 @@ export class PuppeteerRecipeRepository implements RecipeRepository {
     return recipes;
   }
 
-  private async retry<T>(fn: () => Promise<T>, retries = 3): Promise<T> {
-    let attempts = 0;
-    while (attempts < retries) {
+  private async retry<T>(
+    fn: () => Promise<T>,
+    retries = 3,
+    delayMs = 1000,
+  ): Promise<T> {
+    for (let attempt = 1; attempt <= retries; attempt++) {
       try {
         return await fn();
       } catch (error) {
-        attempts++;
-        Logger.warn(`Retrying due to error: ${error}`);
-        if (attempts >= retries) throw new Error('Maximum retries reached');
+        if (attempt < retries) {
+          const waitTime = delayMs * 2 ** (attempt - 1);
+          Logger.warn(`Retrying in ${waitTime}ms due to error: ${error}`);
+          await delay(waitTime);
+        }
       }
     }
-    throw new Error('Function did not return a result');
+    throw new Error('Function did not return a result after maximum retries');
   }
 
   private async scrapePage(
