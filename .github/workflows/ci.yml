@@ -43,11 +43,11 @@ jobs:
 
       - name: Save coverage report
         run: |
-          mkdir -p coverage
-          cp -R ./coverage ./
+          mkdir -p artifacts/coverage
+          cp -R ./coverage/* artifacts/coverage
 
       - name: Upload coverage as artifact
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
-          path: coverage/
+          path: artifacts/coverage/
