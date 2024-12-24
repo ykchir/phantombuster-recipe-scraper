@@ -1,10 +1,11 @@
-import js from '@eslint/js';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
-import jestPlugin from 'eslint-plugin-jest';
-import prettierPlugin from 'eslint-plugin-prettier';
+const js = require('@eslint/js');
+const tsPlugin = require('@typescript-eslint/eslint-plugin');
+const tsParser = require('@typescript-eslint/parser');
+const jestPlugin = require('eslint-plugin-jest');
+const prettierPlugin = require('eslint-plugin-prettier');
+const globals = require('globals');
 
-export default [
+module.exports = [
   // Base configuration
   js.configs.recommended,
 
@@ -14,7 +15,7 @@ export default [
     languageOptions: {
       parser: tsParser,
       globals: {
-        ...require('globals').node,
+        ...globals.node,
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
       },

@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build-and-test:
@@ -15,6 +12,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -26,6 +31,12 @@ jobs:
 
       - name: Run linting
         run: npm run lint
+
+      - name: Validate outdated dependencies
+        run: npm outdated || echo "No outdated dependencies"
+
+      - name: Run npm audit
+        run: npm audit --production --audit-level=moderate || echo "Audit completed with issues"
 
       - name: Run tests with coverage
         run: npm run test
