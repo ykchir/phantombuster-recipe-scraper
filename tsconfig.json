@@ -8,5 +8,6 @@
     "baseUrl": ".",
     "typeRoots": ["./src/types", "./node_modules/@types"]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

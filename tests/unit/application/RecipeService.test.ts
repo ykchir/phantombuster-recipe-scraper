@@ -8,13 +8,15 @@ describe('RecipeService', () => {
 
     const service = new RecipeService(mockRepository);
 
-    await expect(service.searchRecipes('', 1)).rejects.toThrow('Query cannot be empty');
+    await expect(service.searchRecipes('', 1)).rejects.toThrow(
+      'Query cannot be empty',
+    );
   });
 
   it('should return recipes from the repository', async () => {
     const mockRepository: RecipeRepository = {
       searchRecipes: jest.fn().mockResolvedValue([
-        new Recipe('Recipe 1', '5 stars', 10, 'http://example.com/1'),
+        new Recipe('Recipe 1', 5, 10, 'http://example.com/1'), // Utilise un nombre pour `rating`
       ]),
     };
 
@@ -24,5 +26,6 @@ describe('RecipeService', () => {
 
     expect(recipes).toHaveLength(1);
     expect(recipes[0].name).toBe('Recipe 1');
+    expect(recipes[0].rating).toBe(5); // Vérifie un nombre
   });
 });

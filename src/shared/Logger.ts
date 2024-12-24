@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export const Logger = {
   info: (message: string) => console.log(`[INFO] ${message}`),
   error: (message: string, error?: Error) => {
