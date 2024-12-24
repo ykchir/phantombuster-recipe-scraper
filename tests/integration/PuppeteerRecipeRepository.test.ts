@@ -1,0 +1,25 @@
+import { PuppeteerRecipeRepository } from "../../src/infrastructure/PuppeteerRecipeRepository";
+import puppeteer, { Browser } from "puppeteer";
+
+let browser: Browser;
+
+beforeAll(async () => {
+  browser = await puppeteer.launch({ headless: "new" });
+});
+
+afterAll(async () => {
+  if (browser) {
+    await browser.close();
+  }
+});
+
+test("PuppeteerRecipeRepository should return recipes from Allrecipes", async () => {
+  const repository = new PuppeteerRecipeRepository();
+  const recipes = await repository.searchRecipes("chicken", 1);
+
+  expect(recipes.length).toBeGreaterThan(0);
+  expect(recipes[0]).toHaveProperty("name");
+  expect(recipes[0]).toHaveProperty("rating");
+  expect(recipes[0]).toHaveProperty("reviews");
+  expect(recipes[0]).toHaveProperty("url");
+});

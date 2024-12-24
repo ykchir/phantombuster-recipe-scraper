@@ -1,0 +1,9 @@
+import puppeteer from "puppeteer";
+
+(async () => {
+  const browser = await puppeteer.launch({ headless: "new" });
+  const page = await browser.newPage();
+  await page.goto("https://linkfluencer.io/en/blog/why-creators-need-linkfluencer-smartlinks");
+  console.log(await page.title());
+  await browser.close();
+})();
