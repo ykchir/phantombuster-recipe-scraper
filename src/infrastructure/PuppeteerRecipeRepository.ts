@@ -7,22 +7,20 @@ import { Logger } from '../shared/Logger';
 export class PuppeteerRecipeRepository implements RecipeRepository {
   async searchRecipes(query: string, pages: number): Promise<Recipe[]> {
     const browser = await puppeteer.launch({ headless: 'new' });
-    const page: Page = await browser.newPage();
     const recipes: Recipe[] = [];
-
     try {
-      for (let i = 0; i < pages; i++) {
-        const pageRecipes = await this.scrapePage(page, query, i);
-        recipes.push(
-          ...pageRecipes.map(
-            (r) => new Recipe(r.name, r.rating, r.reviews, r.url),
-          ),
-        );
-      }
+      const results = await Promise.all(
+        Array.from({ length: pages }).map(async (_, i) => {
+          const page = await browser.newPage();
+          const pageRecipes = await this.scrapePage(page, query, i);
+          await page.close();
+          return pageRecipes;
+        }),
+      );
+      recipes.push(...results.flat());
     } finally {
       await browser.close();
     }
-
     return recipes;
   }
 
