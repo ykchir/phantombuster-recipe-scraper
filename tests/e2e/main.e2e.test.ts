@@ -17,4 +17,11 @@ describe('E2E Test', () => {
     expect(results[0]).toHaveProperty('reviews');
     expect(results[0]).toHaveProperty('url');
   });
+
+  it('should filter results by minimum rating', async () => {
+    const controller = new RecipeController();
+    const results = await controller.handleSearch('chicken', 1, 4);
+
+    expect(results.every((recipe) => recipe.rating >= 4)).toBe(true);
+  });
 });
