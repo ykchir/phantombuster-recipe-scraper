@@ -1,26 +1,27 @@
 import minimist from 'minimist';
 import Buster from 'phantombuster';
-import { RecipeController } from './interface/RecipeController';
-import { ArgumentSchema, Arguments } from './shared/Validation';
-import { Logger } from './shared/Logger';
+import { RecipeController } from './interface/RecipeController.js';
+import { ArgumentSchema, Arguments } from './shared/Validation.js';
+import { Logger } from './shared/Logger.js';
 
 (async () => {
   const buster = new Buster();
 
-  const argsRaw = minimist(process.argv.slice(2));
+  const cliArgs = minimist(process.argv.slice(2));
 
-  const args = ArgumentSchema.parse({
-    query: argsRaw.query,
-    pages: argsRaw.pages,
-    minRating: argsRaw.minRating,
-    format: argsRaw.format,
-  }) as Arguments;
+  const busterArgs = buster.argument as Record<string, unknown>;
+
+  const argsRaw = {
+    query: cliArgs.query || busterArgs.query,
+    pages: cliArgs.pages || busterArgs.pages,
+    minRating: cliArgs.minRating || busterArgs.minRating,
+    format: cliArgs.format || busterArgs.format,
+  };
+
+  const args = ArgumentSchema.parse(argsRaw) as Arguments;
 
   try {
-    const query = args.query;
-    const pages = args.pages;
-    const minRating = args.minRating;
-    const format = args.format as 'json' | 'csv';
+    const { query, pages, minRating, format } = args;
 
     Logger.info(`Agent ID: ${buster.agentId}`);
 
