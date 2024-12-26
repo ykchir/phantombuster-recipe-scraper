@@ -8,6 +8,7 @@ module.exports = {
   testMatch: ['**/*.test.ts'],
   moduleNameMapper: {
     '^phantombuster$': '<rootDir>/__mocks__/phantombuster.ts',
+    '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   collectCoverage: true,
   coverageThreshold: {

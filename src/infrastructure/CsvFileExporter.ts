@@ -1,7 +1,7 @@
-import { FileExporter } from '../domain/FileExporter';
 import { parse } from 'json2csv';
 import fs from 'fs/promises';
-import { Logger } from '../shared/Logger';
+import { FileExporter } from '../domain/FileExporter.js';
+import { Logger } from '../shared/Logger.js';
 
 export class CsvFileExporter implements FileExporter {
   async export(data: object[], fileName: string): Promise<void> {

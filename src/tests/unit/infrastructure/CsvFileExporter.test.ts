@@ -1,4 +1,4 @@
-import { CsvFileExporter } from '../../../src/infrastructure/CsvFileExporter';
+import { CsvFileExporter } from '../../../infrastructure/CsvFileExporter.js';
 import fs from 'fs/promises';
 
 jest.mock('fs/promises');

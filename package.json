@@ -4,6 +4,8 @@
   "description": "Create a Phantom",
   "main": "index.js",
   "scripts": {
+    "build": "tsc && mkdir -p dist/types && cp src/types/phantombuster.js dist/types/",
+    "start": "node -r tsconfig-paths/register dist/main.js",
     "test": "jest --coverage",
     "lint": "eslint 'src/**/*.{js,ts}'",
     "lint:fix": "eslint 'src/**/*.{js,ts}' --fix",
@@ -12,17 +14,20 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "dependencies": {
     "json2csv": "^6.0.0-alpha.2",
+    "minimist": "^1.2.8",
     "puppeteer": "^20.9.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-recaptcha": "^3.6.8",
+    "tsconfig-paths": "^4.2.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/json2csv": "^5.0.7",
+    "@types/minimist": "^1.2.5",
     "@types/node": "^22.10.2",
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2",

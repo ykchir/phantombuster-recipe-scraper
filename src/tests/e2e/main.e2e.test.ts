@@ -1,4 +1,4 @@
-import { RecipeController } from '../../src/interface/RecipeController';
+import { RecipeController } from '../../interface/RecipeController.js';
 
 jest.mock('phantombuster', () => ({
   argument: { query: 'chicken', pages: 1, minRating: 4 },

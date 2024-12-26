@@ -1,8 +1,8 @@
-import { Recipe } from '../domain/Recipe';
-import { RecipeService } from '../application/RecipeService';
-import { PuppeteerRecipeRepository } from '../infrastructure/PuppeteerRecipeRepository';
-import { Logger } from '../shared/Logger';
-import { FileExporterFactory } from '../infrastructure/FileExporterFactory';
+import { Recipe } from '../domain/Recipe.js';
+import { RecipeService } from '../application/RecipeService.js';
+import { PuppeteerRecipeRepository } from '../infrastructure/PuppeteerRecipeRepository.js';
+import { Logger } from '../shared/Logger.js';
+import { FileExporterFactory } from '../infrastructure/FileExporterFactory.js';
 
 export class RecipeController {
   private readonly recipeService: RecipeService;
@@ -16,13 +16,19 @@ export class RecipeController {
     query: string,
     pages: number,
     minRating = 0,
+    format: 'json' | 'csv' = 'json',
   ): Promise<Recipe[]> {
     if (pages <= 0) {
       throw new Error('Pages must be a positive number');
     }
 
     const recipes = await this.recipeService.searchRecipes(query, pages);
-    return recipes.filter((recipe) => recipe.rating >= minRating);
+    const filteredRecipes = recipes.filter(
+      (recipe) => recipe.rating >= minRating,
+    );
+    await this.exportResults(filteredRecipes, format);
+
+    return filteredRecipes;
   }
 
   async exportResults(

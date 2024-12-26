@@ -1,6 +1,6 @@
-import { FileExporter } from '../domain/FileExporter';
+import { FileExporter } from '../domain/FileExporter.js';
 import fs from 'fs/promises';
-import { Logger } from '../shared/Logger';
+import { Logger } from '../shared/Logger.js';
 
 export class JsonFileExporter implements FileExporter {
   async export(data: object[], fileName: string): Promise<void> {

@@ -1,9 +1,9 @@
-import { RecipeController } from '../../../src/interface/RecipeController';
-import { Recipe } from '../../../src/domain/Recipe';
+import { RecipeController } from '../../../interface/RecipeController.js';
+import { Recipe } from '../../../domain/Recipe.js';
 import fs from 'fs/promises';
 import { parse } from 'json2csv';
-import { JsonFileExporter } from '../../../src/infrastructure/JsonFileExporter';
-import { CsvFileExporter } from '../../../src/infrastructure/CsvFileExporter';
+import { JsonFileExporter } from '../../../infrastructure/JsonFileExporter.js';
+import { CsvFileExporter } from '../../../infrastructure/CsvFileExporter.js';
 
 jest.mock('fs/promises');
 jest.mock('json2csv', () => ({
@@ -34,7 +34,7 @@ describe('RecipeController', () => {
       const results = await controller.handleSearch('chicken', 1, 4.0);
 
       expect(results).toHaveLength(1);
-      expect(results[0].name).toBe('Recipe 1');
+      expect(results[0]?.name).toBe('Recipe 1');
     });
 
     it('should return all recipes if minRating is 0', async () => {
