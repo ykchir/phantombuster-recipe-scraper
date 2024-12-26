@@ -1,4 +1,4 @@
-import { PuppeteerRecipeRepository } from '../../infrastructure/PuppeteerRecipeRepository.js';
+import { PuppeteerRecipeRepository } from '../../infrastructure/PuppeteerRecipeRepository';
 import puppeteer, { Browser } from 'puppeteer';
 
 let browser: Browser;

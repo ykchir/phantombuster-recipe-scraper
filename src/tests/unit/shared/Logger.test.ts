@@ -1,4 +1,4 @@
-import { Logger } from '../../../shared/Logger.js';
+import { Logger } from '../../../shared/Logger';
 
 describe('Logger', () => {
   let consoleSpy: jest.SpyInstance;

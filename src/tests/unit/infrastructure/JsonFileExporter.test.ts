@@ -1,4 +1,4 @@
-import { JsonFileExporter } from '../../../infrastructure/JsonFileExporter.js';
+import { JsonFileExporter } from '../../../infrastructure/JsonFileExporter';
 import fs from 'fs/promises';
 
 jest.mock('fs/promises');

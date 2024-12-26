@@ -1,5 +1,5 @@
 import puppeteer, { Browser } from 'puppeteer';
-import { solveCaptcha } from '../../../shared/CaptchaSolver.js';
+import { solveCaptcha } from '../../../shared/CaptchaSolver';
 
 let browser: Browser;
 
