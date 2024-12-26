@@ -1,8 +1,8 @@
-import { Recipe } from '../domain/Recipe.js';
-import { RecipeService } from '../application/RecipeService.js';
-import { PuppeteerRecipeRepository } from '../infrastructure/PuppeteerRecipeRepository.js';
-import { Logger } from '../shared/Logger.js';
-import { FileExporterFactory } from '../infrastructure/FileExporterFactory.js';
+import { Recipe } from '../domain/Recipe';
+import { RecipeService } from '../application/RecipeService';
+import { PuppeteerRecipeRepository } from '../infrastructure/PuppeteerRecipeRepository';
+import { Logger } from '../shared/Logger';
+import { FileExporterFactory } from '../infrastructure/FileExporterFactory';
 
 export class RecipeController {
   private readonly recipeService: RecipeService;

@@ -1,4 +1,4 @@
-import { Recipe } from '../../../domain/Recipe.js';
+import { Recipe } from '../../../domain/Recipe';
 import { describe, it, expect } from '@jest/globals';
 
 describe('Recipe', () => {

@@ -1,6 +1,6 @@
-import { FileExporterFactory } from '../../../infrastructure/FileExporterFactory.js';
-import { JsonFileExporter } from '../../../infrastructure/JsonFileExporter.js';
-import { CsvFileExporter } from '../../../infrastructure/CsvFileExporter.js';
+import { FileExporterFactory } from '../../../infrastructure/FileExporterFactory';
+import { JsonFileExporter } from '../../../infrastructure/JsonFileExporter';
+import { CsvFileExporter } from '../../../infrastructure/CsvFileExporter';
 
 describe('FileExporterFactory', () => {
   it('should return a JsonFileExporter for json format', () => {

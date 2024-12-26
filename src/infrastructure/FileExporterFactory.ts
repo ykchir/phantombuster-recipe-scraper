@@ -1,6 +1,6 @@
-import { FileExporter } from '../domain/FileExporter.js';
-import { JsonFileExporter } from '../infrastructure/JsonFileExporter.js';
-import { CsvFileExporter } from '../infrastructure/CsvFileExporter.js';
+import { FileExporter } from '../domain/FileExporter';
+import { JsonFileExporter } from '../infrastructure/JsonFileExporter';
+import { CsvFileExporter } from '../infrastructure/CsvFileExporter';
 
 export class FileExporterFactory {
   static createExporter(format: 'json' | 'csv'): FileExporter {

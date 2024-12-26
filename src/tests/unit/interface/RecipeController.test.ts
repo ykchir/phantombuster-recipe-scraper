@@ -1,9 +1,9 @@
-import { RecipeController } from '../../../interface/RecipeController.js';
-import { Recipe } from '../../../domain/Recipe.js';
+import { RecipeController } from '../../../interface/RecipeController';
+import { Recipe } from '../../../domain/Recipe';
 import fs from 'fs/promises';
 import { parse } from 'json2csv';
-import { JsonFileExporter } from '../../../infrastructure/JsonFileExporter.js';
-import { CsvFileExporter } from '../../../infrastructure/CsvFileExporter.js';
+import { JsonFileExporter } from '../../../infrastructure/JsonFileExporter';
+import { CsvFileExporter } from '../../../infrastructure/CsvFileExporter';
 
 jest.mock('fs/promises');
 jest.mock('json2csv', () => ({

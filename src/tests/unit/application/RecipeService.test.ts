@@ -1,6 +1,6 @@
-import { RecipeService } from '../../../application/RecipeService.js';
-import { RecipeRepository } from '../../../domain/RecipeRepository.js';
-import { Recipe } from '../../../domain/Recipe.js';
+import { RecipeService } from '../../../application/RecipeService';
+import { RecipeRepository } from '../../../domain/RecipeRepository';
+import { Recipe } from '../../../domain/Recipe';
 
 describe('RecipeService', () => {
   it('should throw an error if the query is empty', async () => {

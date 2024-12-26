@@ -1,8 +1,8 @@
 import minimist from 'minimist';
 import Buster from 'phantombuster';
-import { RecipeController } from './interface/RecipeController.js';
-import { ArgumentSchema, Arguments } from './shared/Validation.js';
-import { Logger } from './shared/Logger.js';
+import { RecipeController } from './interface/RecipeController';
+import { ArgumentSchema, Arguments } from './shared/Validation';
+import { Logger } from './shared/Logger';
 
 (async () => {
   const buster = new Buster();

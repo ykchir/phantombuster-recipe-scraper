@@ -1,5 +1,5 @@
 import { Page } from 'puppeteer';
-import { Logger } from './Logger.js';
+import { Logger } from './Logger';
 
 export async function solveCaptcha(page: Page): Promise<boolean> {
   try {
