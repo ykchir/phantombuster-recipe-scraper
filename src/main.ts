@@ -1,3 +1,4 @@
+import minimist from 'minimist';
 import Buster from 'phantombuster';
 import { RecipeController } from './interface/RecipeController';
 import { ArgumentSchema, Arguments } from './shared/Validation';
@@ -6,17 +7,30 @@ import { Logger } from './shared/Logger';
 (async () => {
   const buster = new Buster();
 
-  const argsRaw = buster.argument as Record<string, unknown>;
-  const args = ArgumentSchema.parse(argsRaw) as Arguments;
+  const argsRaw = minimist(process.argv.slice(2));
+
+  const args = ArgumentSchema.parse({
+    query: argsRaw.query,
+    pages: argsRaw.pages,
+    minRating: argsRaw.minRating,
+    format: argsRaw.format,
+  }) as Arguments;
 
   try {
     const query = args.query;
     const pages = args.pages;
+    const minRating = args.minRating;
+    const format = args.format as 'json' | 'csv';
 
     Logger.info(`Agent ID: ${buster.agentId}`);
 
     const controller = new RecipeController();
-    const results = await controller.handleSearch(query, pages);
+    const results = await controller.handleSearch(
+      query,
+      pages,
+      minRating,
+      format,
+    );
 
     await buster.setResultObject(results);
   } catch (error: unknown) {

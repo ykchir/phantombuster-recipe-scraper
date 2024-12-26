@@ -16,13 +16,19 @@ export class RecipeController {
     query: string,
     pages: number,
     minRating = 0,
+    format: 'json' | 'csv' = 'json',
   ): Promise<Recipe[]> {
     if (pages <= 0) {
       throw new Error('Pages must be a positive number');
     }
 
     const recipes = await this.recipeService.searchRecipes(query, pages);
-    return recipes.filter((recipe) => recipe.rating >= minRating);
+    const filteredRecipes = recipes.filter(
+      (recipe) => recipe.rating >= minRating,
+    );
+    await this.exportResults(filteredRecipes, format);
+
+    return filteredRecipes;
   }
 
   async exportResults(

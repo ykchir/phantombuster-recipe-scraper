@@ -36,12 +36,15 @@ module.exports = [
     },
   },
   {
-    ignores: ['src/types/phantombuster.d.ts'],
+    ignores: ['src/types/phantombuster.d.ts', 'src/types/phantombuster.js'],
   },
 
   // Prettier integration
   {
     files: ['**/*.{js,ts}'],
+    plugins: {
+      prettier: prettierPlugin,
+    },
     rules: {
       'prettier/prettier': ['error'],
     },

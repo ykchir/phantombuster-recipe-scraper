@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
+    "module": "NodeNext",
+    "target": "ESNext",
     "strict": true,
+    "moduleResolution": "NodeNext",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "outDir": "./dist",
+    "rootDir": "./src",
     "baseUrl": ".",
+    "paths": {
+      "phantombuster": ["./src/types/phantombuster"]
+    },
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
@@ -14,8 +20,9 @@
     "alwaysStrict": true,
     "lib": ["es6", "dom"],
     "types": ["node", "jest"],
-    "typeRoots": ["./src/types", "./node_modules/@types"]
+    "typeRoots": ["./src/types", "./node_modules/@types"],
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*", "__mocks__/**/*", "tests/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

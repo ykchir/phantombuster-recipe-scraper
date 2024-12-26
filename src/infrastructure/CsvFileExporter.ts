@@ -1,6 +1,6 @@
-import { FileExporter } from '../domain/FileExporter';
 import { parse } from 'json2csv';
 import fs from 'fs/promises';
+import { FileExporter } from '../domain/FileExporter';
 import { Logger } from '../shared/Logger';
 
 export class CsvFileExporter implements FileExporter {

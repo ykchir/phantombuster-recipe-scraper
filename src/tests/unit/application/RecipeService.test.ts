@@ -1,6 +1,6 @@
-import { RecipeService } from '../../../src/application/RecipeService';
-import { RecipeRepository } from '../../../src/domain/RecipeRepository';
-import { Recipe } from '../../../src/domain/Recipe';
+import { RecipeService } from '../../../application/RecipeService';
+import { RecipeRepository } from '../../../domain/RecipeRepository';
+import { Recipe } from '../../../domain/Recipe';
 
 describe('RecipeService', () => {
   it('should throw an error if the query is empty', async () => {
@@ -25,7 +25,8 @@ describe('RecipeService', () => {
     const recipes = await service.searchRecipes('chicken', 1);
 
     expect(recipes).toHaveLength(1);
-    expect(recipes[0].name).toBe('Recipe 1');
-    expect(recipes[0].rating).toBe(5); // Vérifie un nombre
+    expect(recipes[0]).toBeDefined();
+    expect(recipes[0]?.name).toBe('Recipe 1');
+    expect(recipes[0]?.rating).toBe(5); // Vérifie un nombre
   });
 });

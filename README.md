@@ -25,7 +25,7 @@ PhantomBuster Recipe Scraper is a Node.js application written in TypeScript, des
 1. Clone this repository:
 
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/ykchir/phantombuster-recipe-scraper.git
    cd phantombuster-recipe-scraper
    ```
 
@@ -45,7 +45,7 @@ PhantomBuster Recipe Scraper is a Node.js application written in TypeScript, des
 Run the scraper with the following command:
 
 ```bash
-npm start --query="chicken" --pages=2 --minRating=4
+npm start -- --query="chicken" --pages=2 --minRating=4
 ```
 
 ### Configurable Options
@@ -53,14 +53,15 @@ npm start --query="chicken" --pages=2 --minRating=4
 - `query`: Search term (default: `"chicken"`).
 - `pages`: Number of pages to scrape (default: 1).
 - `minRating`: Minimum rating for filtering results (default: 0).
+- `format`: Format of the exported file ( CSV or JSON, default: 'json').
 
 ### Example arguments
 
 ```bash
-npm start --query="pasta" --pages=3 --minRating=4.5
+npm start -- --query="wings" --pages=2 --minRating=4.5 --format="csv"
 ```
 
-This will scrape recipes for "pasta" across 3 pages with a minimum rating of 4.5.
+This will scrape recipes for "pasta" across 3 pages with a minimum rating of 4.5 and exports results into csv file.
 
 ## Testing
 
@@ -85,21 +86,20 @@ Integration tests include custom timeouts to handle long-running operations (e.g
 ## Project Structure
 
 ```plaintext
-├── __mocks__           # PhantomBuster mocks
-├── coverage            # Test coverage reports
 ├── dist                # Compiled JavaScript code
 ├── src
+│   ├── __mocks__       # PhantomBuster mocks
 │   ├── application     # Business services
 │   ├── domain          # Entities and interfaces
-│   ├── infrastructure  # Puppeteer scraper
+│   ├── infrastructure  # Puppeteer scraper and File exporter factory
 │   ├── interface       # Project entry points
 │   ├── shared          # Reusable utilities (Logger, CaptchaSolver)
+│   ├── tests           # Organized test suite
+│   │   ├── e2e         # End-to-end tests
+│   │   ├── integration # Integration tests
+│   │   ├── unit        # Unit tests
 │   ├── types           # Custom types and extensions
 │   └── main.ts         # Main project entry
-├── tests               # Organized test suite
-│   ├── e2e             # End-to-end tests
-│   ├── integration     # Integration tests
-│   └── unit            # Unit tests
 ```
 
 ## Key Technical Highlights
@@ -126,13 +126,14 @@ const results = await Promise.all(
 Input data validation is handled using `Zod`:
 
 ```typescript
-Copier le code
 const schema = z.object({
-  query: z.string().min(1),
-  pages: z.number().min(1),
-  minRating: z.number().min(0).max(5),
+  query: z.string().nonempty('Query is required').default('default-query'),
+  pages: z.number().int().min(1).default(1),
+  minRating: z.number().min(0).default(0),
+  format: z.string().default('json'),
 });
-const args = schema.parse({ query, pages, minRating });
+
+const args = schema.parse({ query, pages, minRating, format });
 ```
 
 ### 4. Advanced Tests
