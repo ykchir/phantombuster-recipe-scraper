@@ -1,3 +1,5 @@
+import { Logger } from '../shared/Logger';
+
 class Buster {
   public agentId = 12345;
   public apiKey = 'mock-api-key';
@@ -9,6 +11,8 @@ class Buster {
   }
 
   async solveCaptcha(selector: string): Promise<string> {
+    Logger.info(`Solving captcha:  ${selector}`);
+
     return 'mock-captcha-solution';
   }
 }

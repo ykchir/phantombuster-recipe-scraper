@@ -14,8 +14,9 @@ describe('FileExporterFactory', () => {
   });
 
   it('should throw an error for unsupported formats', () => {
-    expect(() => FileExporterFactory.createExporter('xml' as any)).toThrow(
-      'Unsupported export format: xml',
+    const unsupportedFormat = 'xml' as 'json' | 'csv';
+    expect(() => FileExporterFactory.createExporter(unsupportedFormat)).toThrow(
+      `Unsupported export format: ${unsupportedFormat}`,
     );
   });
 });

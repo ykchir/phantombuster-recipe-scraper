@@ -110,11 +110,17 @@ describe('RecipeController', () => {
       ];
 
       await expect(
-        controller.exportResults(mockRecipes, 'xml' as any),
+        controller.exportResults(
+          mockRecipes,
+          'xml' as unknown as 'json' | 'csv',
+        ),
       ).rejects.toThrow('Unsupported export format: xml');
 
       try {
-        await controller.exportResults(mockRecipes, 'xml' as any);
+        await controller.exportResults(
+          mockRecipes,
+          'xml' as unknown as 'json' | 'csv',
+        );
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
         expect((error as Error).message).toBe('Unsupported export format: xml');
@@ -124,7 +130,10 @@ describe('RecipeController', () => {
     it('should handle unsupported formats explicitly', async () => {
       const mockRecipes: Recipe[] = [];
       await expect(
-        controller.exportResults(mockRecipes, 'yaml' as any),
+        controller.exportResults(
+          mockRecipes,
+          'yaml' as unknown as 'json' | 'csv',
+        ),
       ).rejects.toThrow('Unsupported export format: yaml');
     });
 
