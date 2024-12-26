@@ -25,7 +25,7 @@ PhantomBuster Recipe Scraper is a Node.js application written in TypeScript, des
 1. Clone this repository:
 
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/ykchir/phantombuster-recipe-scraper.git
    cd phantombuster-recipe-scraper
    ```
 
@@ -126,7 +126,6 @@ const results = await Promise.all(
 Input data validation is handled using `Zod`:
 
 ```typescript
-Copier le code
 const schema = z.object({
   query: z.string().nonempty('Query is required').default('default-query'),
   pages: z.number().int().min(1).default(1),
