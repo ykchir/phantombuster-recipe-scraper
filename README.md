@@ -7,7 +7,7 @@ PhantomBuster Recipe Scraper is a Node.js application written in TypeScript, des
 ## Features
 
 - **Multi-page scraping**: Retrieve recipes across multiple pages with parallelization for optimal performance.
-- **Argument validation**: Use of `Zod` to ensure input integrity.
+- **Argument validation**: Use of [Zod](https://zod.dev/) to ensure input integrity.
 - **Advanced filtering**: Filter recipes based on a minimum rating criteria.
 - **CAPTCHA handling**: Automatic CAPTCHA detection with an extensible interface for automated solving.
 - **Modular logging system**: Configurable logging levels (INFO, WARN, ERROR).
@@ -17,7 +17,7 @@ PhantomBuster Recipe Scraper is a Node.js application written in TypeScript, des
 
 - Node.js (>=16.x)
 - npm or yarn
-- PhantomBuster API (optional for mocks)
+- [PhantomBuster](https://phantombuster.com/) API (optional for mocks)
 - Internet access for scraping.
 
 ## Installation
@@ -50,18 +50,18 @@ npm start -- --query="chicken" --pages=2 --minRating=4
 
 ### Configurable Options
 
-- `query`: Search term (default: `"chicken"`).
-- `pages`: Number of pages to scrape (default: 1).
-- `minRating`: Minimum rating for filtering results (default: 0).
-- `format`: Format of the exported file ( CSV or JSON, default: 'json').
+- `query` (string): Search term (default: `"chicken"`).
+- `pages`(number): Number of pages to scrape (default: 1).
+- `minRating` (number): Minimum rating for filtering results (default: 0).
+- `format` (string): The output file format, either `json` or `csv`(default: 'json').
 
 ### Example arguments
 
 ```bash
-npm start -- --query="wings" --pages=2 --minRating=4.5 --format="csv"
+npm start -- --query="pasta" --pages=3 --minRating=4.5 --format="csv"
 ```
 
-This will scrape recipes for "pasta" across 3 pages with a minimum rating of 4.5 and exports results into csv file.
+This will scrape recipes for "pasta" across 3 pages with a minimum rating of 4.5 and exports results into a csv file.
 
 ## Testing
 
@@ -172,4 +172,4 @@ This project is licensed under the MIT License.
 
 ## Author
 
-Developed by ykchir.
+Developed by [ykchir](mailto:ykchir@example.com).
