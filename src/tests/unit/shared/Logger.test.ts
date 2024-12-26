@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-import { Logger } from '../../../src/shared/Logger';
+import { Logger } from '../../../shared/Logger.js';
 
 describe('Logger', () => {
   let consoleSpy: jest.SpyInstance;

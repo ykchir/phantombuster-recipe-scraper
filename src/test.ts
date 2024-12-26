@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { Logger } from './shared/Logger';
+import { Logger } from './shared/Logger.js';
 
 (async () => {
   const browser = await puppeteer.launch({ headless: 'new' });

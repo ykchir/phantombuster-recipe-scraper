@@ -1,10 +1,10 @@
 import puppeteer, { Page } from 'puppeteer';
 import { performance } from 'perf_hooks';
-import { Recipe } from '../domain/Recipe';
-import { RecipeRepository } from '../domain/RecipeRepository';
-import { solveCaptcha } from '../shared/CaptchaSolver';
-import { Logger } from '../shared/Logger';
-import { delay } from '../shared/Utils';
+import { Recipe } from '../domain/Recipe.js';
+import { RecipeRepository } from '../domain/RecipeRepository.js';
+import { solveCaptcha } from '../shared/CaptchaSolver.js';
+import { Logger } from '../shared/Logger.js';
+import { delay } from '../shared/Utils.js';
 
 export class PuppeteerRecipeRepository implements RecipeRepository {
   async searchRecipes(query: string, pages: number): Promise<Recipe[]> {

@@ -1,5 +1,5 @@
-import { Recipe } from '../domain/Recipe';
-import { RecipeRepository } from '../domain/RecipeRepository';
+import { Recipe } from '../domain/Recipe.js';
+import { RecipeRepository } from '../domain/RecipeRepository.js';
 
 export class RecipeService {
   constructor(private readonly recipeRepository: RecipeRepository) {}

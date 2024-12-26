@@ -1,6 +1,6 @@
-import { FileExporterFactory } from '../../../src/infrastructure/FileExporterFactory';
-import { JsonFileExporter } from '../../../src/infrastructure/JsonFileExporter';
-import { CsvFileExporter } from '../../../src/infrastructure/CsvFileExporter';
+import { FileExporterFactory } from '../../../infrastructure/FileExporterFactory.js';
+import { JsonFileExporter } from '../../../infrastructure/JsonFileExporter.js';
+import { CsvFileExporter } from '../../../infrastructure/CsvFileExporter.js';
 
 describe('FileExporterFactory', () => {
   it('should return a JsonFileExporter for json format', () => {
@@ -14,8 +14,9 @@ describe('FileExporterFactory', () => {
   });
 
   it('should throw an error for unsupported formats', () => {
-    expect(() => FileExporterFactory.createExporter('xml' as any)).toThrow(
-      'Unsupported export format: xml',
+    const unsupportedFormat = 'xml' as 'json' | 'csv';
+    expect(() => FileExporterFactory.createExporter(unsupportedFormat)).toThrow(
+      `Unsupported export format: ${unsupportedFormat}`,
     );
   });
 });
