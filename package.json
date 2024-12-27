@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && mkdir -p dist/types && cp src/types/phantombuster.js dist/types/",
+    "build:bundle": "esbuild src/main.ts --bundle --platform=node --outfile=dist/bundle.js",
     "start": "node -r tsconfig-paths/register dist/main.js",
+    "start:bundle": "node dist/bundle.js",
     "test": "jest --coverage",
     "lint": "eslint 'src/**/*.{js,ts}'",
     "lint:fix": "eslint 'src/**/*.{js,ts}' --fix",
@@ -31,6 +33,7 @@
     "@types/node": "^22.10.2",
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2",
+    "esbuild": "^0.24.2",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
