@@ -37,6 +37,10 @@ PhantomBuster Recipe Scraper is a Node.js application written in TypeScript, des
    ```bash
    npm run build
    ```
+4. Build the Bundle:
+   ```bash
+   npm run build:bundle
+   ```
 
 ## Usage
 
@@ -46,6 +50,12 @@ Run the scraper with the following command:
 
 ```bash
 npm start -- --query="chicken" --pages=2 --minRating=4
+```
+
+Run the bunlde scraper with the following command:
+
+```bash
+npm start:bundle -- --query="rice" --pages=2 --minRating=4
 ```
 
 ### Configurable Options
